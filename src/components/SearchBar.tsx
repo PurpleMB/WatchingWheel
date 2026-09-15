@@ -1,9 +1,13 @@
-function SearchBar({ onSearch }) {
-  function handleSubmit(event) {
+interface SearchBarProps {
+  onSearch: (query: string) => void;
+}
+
+function SearchBar({ onSearch }: SearchBarProps) {
+  function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const query = formData.get("query").trim();
+    const query = (formData.get("query") as string).trim();
 
     if (query) {
       onSearch(query);
@@ -11,7 +15,7 @@ function SearchBar({ onSearch }) {
   }
 
   return (
-    <form OnSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <input name="query" type="search" placeholder="Search shows" />
       <button type="submit">Search</button>
     </form>
