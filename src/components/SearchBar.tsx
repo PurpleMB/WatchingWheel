@@ -17,7 +17,9 @@ function SearchBar({ onSearch }: SearchBarProps) {
   return (
     <form onSubmit={handleSubmit}>
       <input name="query" type="search" placeholder="Search shows" />
-      <button type="submit">Search</button>
+      <button type="submit" aria-label="Search">
+        <i className="bi bi-search" aria-hidden="true" />
+      </button>
     </form>
   );
 }

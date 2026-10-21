@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "generate:popular": "node scripts/generatePopularShows.mjs",
+    "build": "generate:popular && vite build",
     "lint": "oxlint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
