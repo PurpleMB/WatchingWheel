@@ -1,50 +1,42 @@
-import { searchShows, lookupShowByTvdbId } from "./api/tvMaze";
-import type { Show } from "./api/tvMaze.types";
-import type { ShowSeed } from "./api/tvdb.types";
-import SearchBar from "./components/SearchBar";
-import ShowButton from "./components/ShowButton";
-import popularShowIdList from "../data/popularShows.json"
-import { useState, useEffect } from "react";
+import type { Show, Episode } from "./api/tvMaze.types";
+import { useState } from "react";
+import ShowSelection from "./stages/ShowSelection";
+import EpisodeSelection from "./stages/EpisodeSelection";
+import ResultsDisplay from "./stages/ResultsDisplay";
 
-const seeds: ShowSeed[] = popularShowIdList.popularShowIdList;
+
+type Stage = 
+  | { name: "selectShow" }
+  | { name: "selectEpisode"; show: Show }
+  | { name: "displayResults"; episode: Episode }
 
 function App() {
-  const [selectedShow, setSelectedShow] = useState<Show | null>(null);
-  const [popularShows, setPopularShows] = useState<Show[]>([]);
+  const [stage, setStage] = useState<Stage>({ name: "selectShow" });
 
-  useEffect(() => {
-    Promise.allSettled(
-      seeds.map(({ tvdbId }) => lookupShowByTvdbId(tvdbId))
-    ).then((shows) => {
-      setPopularShows(
-        shows.flatMap((r) => (r.status === "fulfilled" ? [r.value] : []))
-      )
-    });
-  }, []);
-
-  function handleSearch(query: string) {
-    searchShows(query).then((shows) => {
-      setSelectedShow(shows[0]?.show ?? null);
-    });
+  switch (stage.name) {
+    case "selectShow":
+      return (
+        <ShowSelection 
+          onSelectShow={(show) => setStage({ name: "selectEpisode", show })}
+        />
+      );
+    case "selectEpisode":
+      return (
+        <EpisodeSelection
+          show={stage.show}
+          onSelectEpisode={(episode) => setStage({ name: "displayResults", episode })}
+          onBack={() => setStage({ name: "selectShow" })}
+        />
+      );
+    case "displayResults":
+      return (
+        <ResultsDisplay
+          episode={stage.episode}
+          onBack={() => setStage({ name: "selectEpisode", show: stage.episode.show })}
+          onRestart={() => setStage({ name: "selectShow" })}
+        />
+      );
   }
-
-  return (
-    <>
-      Watching Wheel!
-      <SearchBar onSearch={handleSearch} />
-
-      {selectedShow && (
-        <ShowButton show={selectedShow} />
-      )}
-
-      <div>
-        {popularShows.map((show) => (
-          <ShowButton key={show.id} show={show} />
-        ))}
-      </div>
-
-    </>
-  );
 }
 
 export default App;

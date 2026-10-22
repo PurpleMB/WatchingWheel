@@ -12,3 +12,8 @@ export interface SearchResult {
     score: number;
     show: Show;
 }
+
+export interface Episode {
+    name: string;
+    show: Show;
+}
