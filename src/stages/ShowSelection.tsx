@@ -27,14 +27,14 @@ function ShowSelection({ onSelectShow }: ShowSelectionProps) {
   }, []);
 
   function handleSearch(query: string) {
-      searchShows(query).then((shows) => {
+    searchShows(query).then((shows) => {
       setSelectedShow(shows[0]?.show ?? null);
-      });
+    });
   }
 
   return (
     <>
-      Watching Wheel!
+      Watching Wheel! Show Selection
       <SearchBar onSearch={handleSearch} />
 
       {selectedShow && (
