@@ -1,0 +1,41 @@
+.step-display {
+    display: flex;
+    align-items: center;
+}
+
+/* All beads */
+.bead {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background: #abd5bd;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+/* Every bead except the first one */
+.bead + .bead {
+    margin-left: 2rem;
+}
+
+/* Connecting element */
+.bead + .bead::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 2rem;
+    height: 2px;
+    background: #abd5bd;
+    transform: translateY(-50%);
+}
+
+.bead--current {
+    width: 8rem;
+    padding: 0 0.9rem;
+    background: #0d6efd;
+    color: white;
+}
