@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { Show, Episode } from "../api/tvMaze.types";
 import { getShowEpisodeList } from "../api/tvMaze";
+import Wheel from "../components/Wheel";
 
 interface EpisodeSelectionProps {
   show: Show;
@@ -30,6 +31,8 @@ function EpisodeSelection({ show, onSelectEpisode, onBack }: EpisodeSelectionPro
           </button>
         ))}
       </div>
+
+      <Wheel />
 
       <button onClick={onBack}>Back</button>
     </>

@@ -1,0 +1,19 @@
+.wheel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wheel {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: conic-gradient(
+        red 0 25%,
+        blue 25% 50%,
+        green 50% 75%,
+        yellow 75% 100%
+    );
+    transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
