@@ -32,7 +32,7 @@ function EpisodeSelection({ show, onSelectEpisode, onBack }: EpisodeSelectionPro
         ))}
       </div>
 
-      <Wheel />
+      <Wheel items={episodes.map((ep) => ep.name)}/>
 
       <button onClick={onBack}>Back</button>
     </>
