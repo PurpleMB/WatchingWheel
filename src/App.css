@@ -1,0 +1,89 @@
+:root {
+  --page-background: #f3f7f4;
+  --surface: #fff;
+  --text-primary: #23332d;
+  --text-muted: #60736a;
+  --accent: #287a56;
+  --border: #dce8e0;
+  --surface-shadow: 0 0.75rem 2rem rgb(35 51 45 / 8%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--page-background);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  padding: clamp(1rem, 2vw, 2rem) 1rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--accent);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.0em;
+}
+
+.step-display-container {
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.main-content {
+  width: min(100%, 72rem);
+  padding: clamp(1rem, 2vw, 2rem) 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1.0rem;
+  background: var(--surface);
+  box-shadow: var(--surface-shadow);
+}
+
+.footer {
+  margin-top: 2rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  .header,
+  .step-display-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .main-content {
+    border-radius: 1rem;
+  }
+}

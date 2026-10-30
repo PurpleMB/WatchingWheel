@@ -1,3 +1,4 @@
+import "./App.css";
 import { useState } from "react";
 import type { Stage } from "./types/stage";
 import ShowSelection from "./stages/ShowSelection";
@@ -39,8 +40,21 @@ function App() {
 
   return (
     <div className="app">
-      <StepDisplay steps={STEPS} currentStepIndex={currentStageIndex} />
-      <main>{renderStage()}</main>
+      <div className="header">
+        <h1>Watching Wheel</h1>
+      </div>
+
+      <div className="step-display-container">
+        <StepDisplay steps={STEPS} currentStepIndex={currentStageIndex} />
+      </div>
+
+      <main className="main-content">
+        {renderStage()}
+      </main>
+
+      <div className="footer">
+
+      </div>
     </div>
   );
 }
