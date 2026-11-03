@@ -1,3 +1,4 @@
+import "./ShowSelection.css"
 import { useState, useEffect } from "react";
 import type { ShowSeed } from "../api/tvdb.types";
 import type { Show } from "../api/tvMaze.types";
@@ -5,6 +6,7 @@ import { searchShows, lookupShowByTvdbId } from "../api/tvMaze";
 import popularShowIdList from "../../data/popularShows.json"
 import SearchBar from "../components/SearchBar";
 import ShowButton from "../components/ShowButton";
+import ShowSection from "../components/ShowSection";
 
 const seeds: ShowSeed[] = popularShowIdList.popularShowIdList;
 
@@ -41,11 +43,20 @@ function ShowSelection({ onSelectShow }: ShowSelectionProps) {
         <ShowButton show={selectedShow} onSelect={onSelectShow} />
       )}
 
-      <div>
-        {popularShows.map((show) => (
-          <ShowButton key={show.id} show={show} onSelect={onSelectShow} />
-        ))}
-      </div>
+
+      <ShowSection
+        title="Purple's Picks"
+        description="Shows picked by Purple (me) for you to enjoy this month"
+        shows={popularShows}
+        onSelectShow={onSelectShow}
+      />
+
+      <ShowSection
+        title="Popular Shows"
+        description="Shows currently trending with viewers"
+        shows={popularShows}
+        onSelectShow={onSelectShow}
+      />
     </>
   );
 }
