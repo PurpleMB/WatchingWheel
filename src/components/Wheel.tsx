@@ -44,7 +44,7 @@ function Wheel({ items }: WheelProps) {
           return (
             <span 
               key={i}
-              className="wheel__lebel"
+              className="wheel__label"
               style={{ transform: `translateY(-50%) rotate(${angle - 90}deg)` }}
             >
               {item}
