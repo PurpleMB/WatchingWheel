@@ -1,0 +1,75 @@
+.episode-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: var(--color-card-background);
+  text-align: left;
+}
+
+.episode-card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.episode-card-show {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+.episode-card-code {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.episode-card-code-badge {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  border: 1px solid currentColor;
+}
+
+.episode-card-summary p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.episode-card-image img,
+.episode-card-image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.episode-card-image-placeholder {
+  display: grid;
+  place-items: center;
+  background-color: var(--color-card-background);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 600px) {
+  .episode-card {
+    grid-template-columns: 1fr;
+  }
+  .episode-card-image {
+    order: -1;
+  }
+}
