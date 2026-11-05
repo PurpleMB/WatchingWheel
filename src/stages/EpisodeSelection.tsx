@@ -24,15 +24,10 @@ function EpisodeSelection({ show, onSelectEpisode, onBack }: EpisodeSelectionPro
 
       <h2>{show.name}</h2>
 
-      <div>
-        {episodes.map((episode) => (
-          <button key={episode.id} onClick={() => onSelectEpisode(episode)}>
-            {episode.name}
-          </button>
-        ))}
-      </div>
-
-      <Wheel items={episodes.map((ep) => ep.name)}/>
+      <Wheel 
+        items={episodes.map((ep) => ep.name)}
+        onResult={(winningEpisodeIndex) => onSelectEpisode(episodes[winningEpisodeIndex])}
+      />
 
       <button onClick={onBack}>Back</button>
     </>

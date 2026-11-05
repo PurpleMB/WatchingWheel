@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.wheel-wrapper {
+    position: relative;
+}
+
 .wheel {
     width: 500px;
     height: 500px;
@@ -30,5 +34,18 @@
     text-overflow: ellipsis;
     font-size: 0.7rem;
     color: white;
+    pointer-events: none;
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-right: 30px solid var(--text-primary);
     pointer-events: none;
 }
