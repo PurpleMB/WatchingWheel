@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "generate:popular": "node scripts/generatePopularShows.mjs",
+    "generate:popular": "node scripts/generatePopularSeeds.mjs",
     "build": "npm run generate:popular && vite build",
     "lint": "oxlint",
     "format": "prettier --write .",
