@@ -1,17 +1,65 @@
 {
-  "lastUpdated": "2026-09-11",
+  "lastUpdated": "2026-11-09T19:34:31.610Z",
   "popularShowSeedList": [
-    {  
-        "tvdbId": 77398,
-        "name": "The X-Files"
+    {
+      "tvdbId": 305288,
+      "name": "Stranger Things"
     },
     {
-        "tvdbId": 78260,
-        "name": "Scooby Doo, Where Are You!"
+      "tvdbId": 121361,
+      "name": "Game of Thrones"
     },
     {
-        "tvdbId": 281643,
-        "name": "Over the Garden Wall"
+      "tvdbId": 153021,
+      "name": "The Walking Dead"
+    },
+    {
+      "tvdbId": 73762,
+      "name": "Grey's Anatomy"
+    },
+    {
+      "tvdbId": 323168,
+      "name": "13 Reasons Why"
+    },
+    {
+      "tvdbId": 311954,
+      "name": "Riverdale"
+    },
+    {
+      "tvdbId": 71663,
+      "name": "The Simpsons"
+    },
+    {
+      "tvdbId": 268592,
+      "name": "The 100"
+    },
+    {
+      "tvdbId": 295685,
+      "name": "Lucifer"
+    },
+    {
+      "tvdbId": 253463,
+      "name": "Black Mirror"
+    },
+    {
+      "tvdbId": 279121,
+      "name": "The Flash (2014)"
+    },
+    {
+      "tvdbId": 336924,
+      "name": "You"
+    },
+    {
+      "tvdbId": 250487,
+      "name": "American Horror Story"
+    },
+    {
+      "tvdbId": 81189,
+      "name": "Breaking Bad"
+    },
+    {
+      "tvdbId": 264586,
+      "name": "Orange Is the New Black"
     }
   ]
 }

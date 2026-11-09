@@ -6,13 +6,14 @@
   "scripts": {
     "dev": "vite",
     "generate:popular": "node scripts/generatePopularShows.mjs",
-    "build": "generate:popular && vite build",
+    "build": "npm run generate:popular && vite build",
     "lint": "oxlint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate:popular": "node scripts/generatePopularSeeds.mjs"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
