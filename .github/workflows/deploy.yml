@@ -22,6 +22,8 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          TVDB_API_KEY: ${{ secrets.TVDB_API_KEY }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

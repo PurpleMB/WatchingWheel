@@ -12,8 +12,7 @@
     "format:check": "prettier --check .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "typecheck": "tsc --noEmit",
-    "generate:popular": "node scripts/generatePopularSeeds.mjs"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
