@@ -7,10 +7,11 @@ interface ShowSectionProps {
   title: string;
   description: string;
   shows: Show[];
+  lastUpdated: string;
   onSelectShow: (show: Show) => void;
 }
 
-function ShowSection({title, description, shows, onSelectShow}: ShowSectionProps) {
+function ShowSection({title, description, shows, lastUpdated, onSelectShow}: ShowSectionProps) {
   const headingId = useId();
 
   return (
@@ -25,6 +26,9 @@ function ShowSection({title, description, shows, onSelectShow}: ShowSectionProps
         {description &&
           <p className="show-section__description">{description}</p>
         }
+        <p className="show-section__last-updated">
+          Last updated: {lastUpdated}
+        </p>
       </header>
       <div className="show-grid">
         {shows.map((show) => (
