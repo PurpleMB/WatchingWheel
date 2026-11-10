@@ -1,5 +1,5 @@
 import "./ShowSelection.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { ShowSeed } from "../api/tvdb.types";
 import type { Show } from "../api/tvMaze.types";
 import { searchShows, lookupShowByTvdbId } from "../api/tvMaze";
@@ -8,7 +8,6 @@ import popularShowSeedList from "../../data/popularShows.json";
 import purplePickSeedList from "../../data/purplePickShows.json";
 
 import SearchBar from "../components/SearchBar";
-import ShowButton from "../components/ShowButton";
 import ShowSection from "../components/ShowSection";
 
 const popularUpdated = popularShowSeedList.lastUpdated;
@@ -20,8 +19,15 @@ interface ShowSelectionProps {
   onSelectShow: (show: Show) => void;
 }
 
+type SearchState =
+  | { status: "idle" }
+  | { status: "loading"; query: string }
+  | { status: "success"; query: string; shows: Show[] }
+  | { status: "error"; query: string };
+
 function ShowSelection({ onSelectShow }: ShowSelectionProps) {
-  const [searchedShow, setSearchedShow] = useState<Show | null>(null);
+  const [search, setSearch] = useState<SearchState>({ status: "idle" });
+  const searchRequestId = useRef(0);
   const [popularShows, setPopularShows] = useState<Show[]>([]);
   const [purplePickShows, setPurplePickShows] = useState<Show[]>([]);
 
@@ -40,20 +46,66 @@ function ShowSelection({ onSelectShow }: ShowSelectionProps) {
         shows.flatMap((r) => (r.status === "fulfilled" ? [r.value] : [])),
       );
     });
+    return () => {
+      searchRequestId.current += 1;
+    };
   }, []);
 
-  function handleSearch(query: string) {
-    searchShows(query).then((shows) => {
-      setSearchedShow(shows[0]?.show ?? null);
-    });
+  async function handleSearch(query: string) {
+    const requestId = ++searchRequestId.current;
+    setSearch({ status: "loading", query });
+
+    try {
+      const results = await searchShows(query);
+
+      if (requestId === searchRequestId.current) {
+        setSearch({
+          status: "success",
+          query,
+          shows: results.map((r) => r.show),
+        });
+      }
+    } catch {
+      if (requestId === searchRequestId.current) {
+        setSearch({ status: "error", query });
+      }
+    }
+  }
+
+  async function handleSearchPreviews(query: string) {
+    const results = await searchShows(query);
+    return results.map((result) => result.show);
   }
 
   return (
     <>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar
+        searchPreviews={handleSearchPreviews}
+        onSearch={handleSearch}
+        onSelectShow={onSelectShow}
+      />
 
-      {searchedShow && (
-        <ShowButton show={searchedShow} onSelect={onSelectShow} />
+      {search.status === "loading" && (
+        <p role="status">Searching for “{search.query}”…</p>
+      )}
+
+      {search.status === "error" && (
+        <p role="alert">
+          Could not search for “{search.query}”. Please try again.
+        </p>
+      )}
+
+      {search.status === "success" && (
+        <ShowSection
+          title="Search Results"
+          description={
+            search.shows.length > 0
+              ? `Results for “${search.query}”`
+              : `No shows found for “${search.query}”.`
+          }
+          shows={search.shows}
+          onSelectShow={onSelectShow}
+        />
       )}
 
       <ShowSection

@@ -2,6 +2,7 @@ export interface Show {
   id: number;
   url: string;
   name: string;
+  premiered: string;
   image?: {
     medium?: string;
     original?: string;

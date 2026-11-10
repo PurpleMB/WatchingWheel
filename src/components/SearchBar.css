@@ -1,0 +1,28 @@
+.search-bar {
+  margin-bottom: 2rem;
+}
+
+.search-bar__input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-bar__input-group input {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-bar__suggestions {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search-bar__suggestions button {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  text-align: left;
+  cursor: pointer;
+}

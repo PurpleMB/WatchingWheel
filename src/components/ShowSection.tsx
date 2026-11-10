@@ -7,7 +7,7 @@ interface ShowSectionProps {
   title: string;
   description: string;
   shows: Show[];
-  lastUpdated: string;
+  lastUpdated?: string;
   onSelectShow: (show: Show) => void;
 }
 
@@ -29,9 +29,11 @@ function ShowSection({
         {description && (
           <p className="show-section__description">{description}</p>
         )}
-        <p className="show-section__last-updated">
-          Last updated: {lastUpdated}
-        </p>
+        {lastUpdated && (
+          <p className="show-section__last-updated">
+            Last updated: {lastUpdated}
+          </p>
+        )}
       </header>
       <div className="show-grid">
         {shows.map((show) => (

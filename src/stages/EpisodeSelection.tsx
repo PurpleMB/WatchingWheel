@@ -20,7 +20,9 @@ function EpisodeSelection({
   const [isLoading, setIsLoading] = useState(true);
   const [isSpinning, setIsSpinning] = useState(false);
 
-  const seasons = [...new Set(episodes.map((ep) => ep.season))].sort((a, b) => a - b);
+  const seasons = [...new Set(episodes.map((ep) => ep.season))].sort(
+    (a, b) => a - b,
+  );
   const seasonEpisodes = episodes.filter((ep) => ep.season === selectedSeason);
 
   useEffect(() => {
@@ -67,11 +69,13 @@ function EpisodeSelection({
 
       {isLoading && <p>Loading episodes...</p>}
 
-      {!isLoading && episodes.filter((ep) => ep.season === selectedSeason).length === 0 && (
+      {!isLoading &&
+        episodes.filter((ep) => ep.season === selectedSeason).length === 0 && (
           <p>No episodes available for this season.</p>
         )}
 
-      {!isLoading && episodes.filter((ep) => ep.season === selectedSeason).length > 0 && (
+      {!isLoading &&
+        episodes.filter((ep) => ep.season === selectedSeason).length > 0 && (
           <Wheel
             items={seasonEpisodes.map((ep) => ep.name)}
             onSpinStateChange={setIsSpinning}
