@@ -8,14 +8,14 @@ function StepDisplay({ steps, currentStepIndex }: Props) {
   return (
     <div className="step-display">
       {steps.map((step, index) => {
-        const isCurrent = index === currentStepIndex; 
+        const isCurrent = index === currentStepIndex;
         return (
           <Fragment key={step.name}>
-            {index > 0 && 
-              <div 
-                className={`bead-connector ${index <= currentStepIndex ? "bead-connector--done" : ""}`} 
+            {index > 0 && (
+              <div
+                className={`bead-connector ${index <= currentStepIndex ? "bead-connector--done" : ""}`}
               />
-            }
+            )}
             <div
               className={`bead ${isCurrent ? "bead--current" : ""} ${index < currentStepIndex ? "bead--done" : ""}`}
             >

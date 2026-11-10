@@ -1,11 +1,11 @@
-import "./ShowSelection.css"
+import "./ShowSelection.css";
 import { useState, useEffect } from "react";
 import type { ShowSeed } from "../api/tvdb.types";
 import type { Show } from "../api/tvMaze.types";
 import { searchShows, lookupShowByTvdbId } from "../api/tvMaze";
 
-import popularShowSeedList from "../../data/popularShows.json"
-import purplePickSeedList from "../../data/purplePickShows.json"
+import popularShowSeedList from "../../data/popularShows.json";
+import purplePickSeedList from "../../data/purplePickShows.json";
 
 import SearchBar from "../components/SearchBar";
 import ShowButton from "../components/ShowButton";
@@ -26,22 +26,20 @@ function ShowSelection({ onSelectShow }: ShowSelectionProps) {
   const [purplePickShows, setPurplePickShows] = useState<Show[]>([]);
 
   useEffect(() => {
-      Promise.allSettled(
-        popularSeeds.map(({ tvdbId }) => lookupShowByTvdbId(tvdbId))
-        ).then((shows) => {
-          setPopularShows(
-              shows.flatMap((r) => (r.status === "fulfilled" ? [r.value] : []))
-          )
-        }
+    Promise.allSettled(
+      popularSeeds.map(({ tvdbId }) => lookupShowByTvdbId(tvdbId)),
+    ).then((shows) => {
+      setPopularShows(
+        shows.flatMap((r) => (r.status === "fulfilled" ? [r.value] : [])),
       );
-      Promise.allSettled(
-        purpleSeeds.map(({ tvdbId }) => lookupShowByTvdbId(tvdbId))
-        ).then((shows) => {
-          setPurplePickShows(
-              shows.flatMap((r) => (r.status === "fulfilled" ? [r.value] : []))
-          )
-        }
+    });
+    Promise.allSettled(
+      purpleSeeds.map(({ tvdbId }) => lookupShowByTvdbId(tvdbId)),
+    ).then((shows) => {
+      setPurplePickShows(
+        shows.flatMap((r) => (r.status === "fulfilled" ? [r.value] : [])),
       );
+    });
   }, []);
 
   function handleSearch(query: string) {
@@ -52,9 +50,8 @@ function ShowSelection({ onSelectShow }: ShowSelectionProps) {
 
   return (
     <>
-      Watching Wheel! Show Selection
-
       <SearchBar onSearch={handleSearch} />
+
       {searchedShow && (
         <ShowButton show={searchedShow} onSelect={onSelectShow} />
       )}

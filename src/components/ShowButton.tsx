@@ -8,15 +8,13 @@ interface ShowButtonProps {
 
 function ShowButton({ show, onSelect }: ShowButtonProps) {
   return (
-    <button 
+    <button
       className="show-button"
-      type="button" 
+      type="button"
       onClick={() => onSelect?.(show)}
     >
       {show.image?.medium && <img src={show.image.medium} alt={show.name} />}
-      <span>
-        {show.name}
-      </span>
+      <span>{show.name}</span>
     </button>
   );
 }

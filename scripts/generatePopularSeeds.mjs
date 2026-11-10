@@ -3,7 +3,8 @@ import path from "path";
 
 const API_KEY = process.env.TVDB_API_KEY;
 const LIST_SIZE = 15;
-const API_URL = "https://api4.thetvdb.com/v4/series/filter?country=usa&lang=eng&sort=score&sortType=desc"
+const API_URL =
+  "https://api4.thetvdb.com/v4/series/filter?country=usa&lang=eng&sort=score&sortType=desc";
 
 if (!API_KEY) {
   throw new Error("TVDB_API_KEY env var is required to generate popular shows");
@@ -34,9 +35,18 @@ const popularShows = await fetchPopularShows(tvdbToken);
 
 const showSeeds = popularShows.slice(0, LIST_SIZE).map((show) => ({
   tvdbId: show.id,
-  name: show.name
+  name: show.name,
 }));
 
 const outPath = path.resolve(import.meta.dirname, "../data/popularShows.json");
-writeFileSync(outPath, JSON.stringify({ lastUpdated: new Date().toISOString(), popularShowSeedList: showSeeds }, null, 2));
-console.log(`Updated popular show seed list at ${outPath} with ${showSeeds.length} entries on ${new Date().toISOString()}`)
+writeFileSync(
+  outPath,
+  JSON.stringify(
+    { lastUpdated: new Date().toISOString(), popularShowSeedList: showSeeds },
+    null,
+    2,
+  ),
+);
+console.log(
+  `Updated popular show seed list at ${outPath} with ${showSeeds.length} entries on ${new Date().toISOString()}`,
+);

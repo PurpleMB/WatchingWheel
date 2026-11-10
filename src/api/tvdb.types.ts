@@ -1,4 +1,4 @@
 export interface ShowSeed {
-    tvdbId: number;
-    name: string;
+  tvdbId: number;
+  name: string;
 }

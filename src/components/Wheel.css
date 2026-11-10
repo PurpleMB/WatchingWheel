@@ -1,51 +1,51 @@
 .wheel-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wheel-wrapper {
-    position: relative;
+  position: relative;
 }
 
 .wheel {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-    transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
 }
 
 .wheel--spinning {
-    cursor: wait;
+  cursor: wait;
 }
 
 .wheel__label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 50%;
-    transform-origin: 0 50%;
-    padding-right: 0.75rem;
-    text-align: right;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 0.7rem;
-    color: white;
-    pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform-origin: 0 50%;
+  padding-right: 0.75rem;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.7rem;
+  color: white;
+  pointer-events: none;
 }
 
 .wheel-pointer {
-    position: absolute;
-    top: 50%;
-    right: -20px;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 14px solid transparent;
-    border-bottom: 14px solid transparent;
-    border-right: 30px solid var(--text-primary);
-    pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 30px solid var(--text-primary);
+  pointer-events: none;
 }

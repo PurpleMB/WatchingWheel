@@ -14,7 +14,9 @@
   height: 2rem;
   width: 2rem;
   border-radius: 1rem;
-  transition: width 0.3s ease, background 0.3s ease;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
   background: var(--accent-muted);
 }
 

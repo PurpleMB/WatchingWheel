@@ -9,13 +9,13 @@ import StepDisplay from "./components/StepDisplay";
 
 function App() {
   const [stage, setStage] = useState<Stage>({ name: "selectShow" });
-  const currentStageIndex = STEPS.findIndex(step => step.name === stage.name);
+  const currentStageIndex = STEPS.findIndex((step) => step.name === stage.name);
 
   function renderStage() {
     switch (stage.name) {
       case "selectShow":
         return (
-          <ShowSelection 
+          <ShowSelection
             onSelectShow={(show) => setStage({ name: "selectEpisode", show })}
           />
         );
@@ -23,7 +23,9 @@ function App() {
         return (
           <EpisodeSelection
             show={stage.show}
-            onSelectEpisode={(episode) => setStage({ name: "displayResults", episode })}
+            onSelectEpisode={(episode) =>
+              setStage({ name: "displayResults", episode })
+            }
             onBack={() => setStage({ name: "selectShow" })}
           />
         );
@@ -31,7 +33,9 @@ function App() {
         return (
           <ResultsDisplay
             episode={stage.episode}
-            onBack={() => setStage({ name: "selectEpisode", show: stage.episode.show })}
+            onBack={() =>
+              setStage({ name: "selectEpisode", show: stage.episode.show })
+            }
             onRestart={() => setStage({ name: "selectShow" })}
           />
         );
@@ -48,16 +52,11 @@ function App() {
         <StepDisplay steps={STEPS} currentStepIndex={currentStageIndex} />
       </div>
 
-      <main className="main-content">
-        {renderStage()}
-      </main>
+      <main className="main-content">{renderStage()}</main>
 
-      <div className="footer">
-
-      </div>
+      <div className="footer"></div>
     </div>
   );
 }
 
 export default App;
- 

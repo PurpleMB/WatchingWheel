@@ -23,7 +23,11 @@ body {
   margin: 0;
   background: var(--page-background);
   color: var(--text-primary);
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
 }
 
 .app {
@@ -45,7 +49,7 @@ body {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.0em;
+  letter-spacing: 0em;
 }
 
 .step-display-container {
@@ -59,7 +63,7 @@ body {
   width: min(100%, 72rem);
   padding: clamp(1rem, 2vw, 2rem) 1rem;
   border: 1px solid var(--border);
-  border-radius: 1.0rem;
+  border-radius: 1rem;
   background: var(--surface);
   box-shadow: var(--surface-shadow);
 }
