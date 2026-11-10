@@ -40,7 +40,7 @@ function EpisodeSelection({
         );
 
         setEpisodes(episodes);
-        setSelectedSeason(seasons[0] || null);
+        setSelectedSeason(seasons[0] ?? null);
       })
       .catch((error: unknown) => {
         console.error(error);
