@@ -1,3 +1,50 @@
+.show-section {
+  --show-card-width: 10rem;
+  --show-card-gap: 1rem;
+  position: relative;
+}
+
+.show-section__card-measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  width: var(--show-card-width);
+  height: 0;
+}
+
+.show-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(100%, var(--show-card-width)), var(--show-card-width))
+  );
+  justify-items: center;
+  justify-content: center;
+  gap: var(--show-card-gap);
+}
+
+.show-section__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.show_section__pagination button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface-light);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.show_section__pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .show-section + .show-section {
   margin-top: 2.5rem;
 }
