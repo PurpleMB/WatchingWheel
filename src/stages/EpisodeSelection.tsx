@@ -4,6 +4,13 @@ import { getShowEpisodeList } from "../api/tvMaze";
 import Wheel from "../components/Wheel";
 import SeasonDropdown from "../components/SeasonDropdown";
 
+const WHEEL_COLORS = [
+  "var(--accent-dark)",
+  "var(--secondary-dark)",
+  "var(--tertiary-dark)",
+  "var(--tetra-dark)",
+];
+
 interface EpisodeSelectionProps {
   show: Show;
   onSelectEpisode: (episode: Episode) => void;
@@ -78,6 +85,7 @@ function EpisodeSelection({
         episodes.filter((ep) => ep.season === selectedSeason).length > 0 && (
           <Wheel
             items={seasonEpisodes.map((ep) => ep.name)}
+            colors={WHEEL_COLORS}
             onSpinStateChange={setIsSpinning}
             onResult={(winningEpisodeIndex) =>
               onSelectEpisode(seasonEpisodes[winningEpisodeIndex])

@@ -8,7 +8,7 @@
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
-  background: var(--surface);
+  background: var(--surface-light);
   box-shadow: var(--surface-shadow);
   cursor: pointer;
   text-align: center;
@@ -35,6 +35,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   line-height: 1.2;
+  color: var(--text-primary);
 }
 
 .show-button:hover {

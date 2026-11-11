@@ -112,13 +112,11 @@ function ShowSelection({ onSelectShow }: ShowSelectionProps) {
         title="Purple's Picks"
         description="Shows picked by Purple (me) for you to enjoy this month!"
         shows={purplePickShows}
-        lastUpdated={purplePickUpdated}
         onSelectShow={onSelectShow}
       />
 
       <ShowSection
         title="Popular Shows"
-        description="Shows currently trending with viewers!"
         shows={popularShows}
         lastUpdated={popularUpdated}
         onSelectShow={onSelectShow}

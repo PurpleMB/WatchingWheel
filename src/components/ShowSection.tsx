@@ -5,7 +5,7 @@ import ShowButton from "./ShowButton";
 
 interface ShowSectionProps {
   title: string;
-  description: string;
+  description?: string;
   shows: Show[];
   lastUpdated?: string;
   onSelectShow: (show: Show) => void;

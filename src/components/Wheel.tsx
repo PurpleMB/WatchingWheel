@@ -6,11 +6,12 @@ const POINTER_ANGLE = 90; // Degrees CW from top of wheel
 
 interface WheelProps {
   items: string[];
+  colors?: string[];
   onSpinStateChange: (isSpinning: boolean) => void;
   onResult: (winningEpisodeIndex: number) => void;
 }
 
-function Wheel({ items, onSpinStateChange, onResult }: WheelProps) {
+function Wheel({ items, colors, onSpinStateChange, onResult }: WheelProps) {
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const winningEpisodeIndex = useRef<number | null>(null);
@@ -26,7 +27,7 @@ function Wheel({ items, onSpinStateChange, onResult }: WheelProps) {
             const hue = (i * 360) / items.length;
             const startPercent = i * slicePercent;
             const endPercent = (i + 1) * slicePercent;
-            return `hsl(${hue} 70% 55%) ${startPercent}% ${endPercent}%`;
+            return `${colors?.[i % colors?.length] ?? `hsl(${hue} 70% 55%)`} ${startPercent}% ${endPercent}%`;
           })
           .join(", ")}
       )`;
