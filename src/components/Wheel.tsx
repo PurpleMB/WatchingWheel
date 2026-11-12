@@ -9,41 +9,77 @@ interface WheelProps {
   items: string[];
   colors?: string[];
   onSpinStateChange: (isSpinning: boolean) => void;
-  onResult: (winningEpisodeIndex: number) => void;
+  onResult: (winningIndex: number) => void;
 }
 
-function Wheel({ radius, items, colors, onSpinStateChange, onResult }: WheelProps) {
+function Wheel({
+  radius,
+  items,
+  colors,
+  onSpinStateChange,
+  onResult,
+}: WheelProps) {
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
-  const winningEpisodeIndex = useRef<number | null>(null);
+  const winningIndex = useRef<number | null>(null);
   const resultTimeout = useRef<number | undefined>(undefined);
 
-  const slicePercent = 100 / items.length;
-  const background =
-    items.length === 0
-      ? "white"
-      : `conic-gradient(
-        ${items
-          .map((_, i) => {
-            const hue = (i * 360) / items.length;
-            const startPercent = i * slicePercent;
-            const endPercent = (i + 1) * slicePercent;
-            return `${colors?.[i % colors?.length] ?? `hsl(${hue} 70% 55%)`} ${startPercent}% ${endPercent}%`;
-          })
-          .join(", ")}
-      )`;
+  let background = "white";
+  if (items.length > 0) {
+    const sliceAngle = 360 / items.length;
+    const blendAngle = Math.min(0.25, sliceAngle / 4);
+
+    const palette = [...new Set(colors ?? [])];
+    const sliceColors = items.map((_, i) => {
+      if (palette.length === 0) {
+        return `hsl(${(i * 360) / items.length} 70% 55%)`;
+      }
+
+      const color = palette[i % palette.length];
+
+      if (i === items.length - 1 && color === palette[0]) {
+        const prevColor = palette[(i - 1) % palette.length];
+        const altColor = palette.find(
+          (c) => c !== prevColor && c !== palette[0],
+        );
+        if (altColor) {
+          return altColor;
+        }
+      }
+
+      return color;
+    });
+
+    const stops = sliceColors.flatMap((color, i) => {
+      const nextColor = sliceColors[(i + 1) % sliceColors.length];
+      const boundary = (i + 0.5) * sliceAngle;
+
+      return [
+        `${color} ${boundary - blendAngle}deg`,
+        `${nextColor} ${boundary + blendAngle}deg`,
+      ];
+    });
+
+    background = `
+      conic-gradient(
+        from ${sliceAngle / 2}deg,
+        ${sliceColors[0]} 0deg,
+        ${stops.join(", ")},
+        ${sliceColors[0]} 360deg
+      )
+    `;
+  }
 
   useEffect(() => () => window.clearTimeout(resultTimeout.current), []);
 
   function spinWheel(rotationDegrees: number) {
     if (isSpinning || items.length === 0) return;
 
-    winningEpisodeIndex.current = Math.floor(Math.random() * items.length);
+    winningIndex.current = Math.floor(Math.random() * items.length);
 
     const sliceAngle = 360 / items.length;
     const jitter = (Math.random() - 0.5) * sliceAngle * 0.9; // Final multiplier keeps it from landing too close to the edge of a slice.
-    const targetRotation =
-      (winningEpisodeIndex.current! + 0.5) * sliceAngle + jitter; // +0.5 centers it within the slice
+    const targetRotation = (winningIndex.current! + 0.5) * sliceAngle + jitter; // +0.5 centers it within the slice
     const extraSpins = 360 * (Math.floor(Math.random() * 3) + 3); // adds 3-5 extra spins to the wheel for variation
 
     const currentRotation = rotation % 360;
@@ -58,7 +94,7 @@ function Wheel({ radius, items, colors, onSpinStateChange, onResult }: WheelProp
   }
 
   return (
-    <div 
+    <div
       className="wheel-container"
       style={{ width: radius * 2, height: radius * 2 }}
     >
@@ -72,7 +108,7 @@ function Wheel({ radius, items, colors, onSpinStateChange, onResult }: WheelProp
             resultTimeout.current = window.setTimeout(() => {
               setIsSpinning(false);
               onSpinStateChange(false);
-              onResult(winningEpisodeIndex.current!);
+              onResult(winningIndex.current!);
             }, RESULT_DELAY_MS);
           }}
         >
