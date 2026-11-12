@@ -5,13 +5,14 @@ const RESULT_DELAY_MS = 800;
 const POINTER_ANGLE = 90; // Degrees CW from top of wheel
 
 interface WheelProps {
+  radius: number;
   items: string[];
   colors?: string[];
   onSpinStateChange: (isSpinning: boolean) => void;
   onResult: (winningEpisodeIndex: number) => void;
 }
 
-function Wheel({ items, colors, onSpinStateChange, onResult }: WheelProps) {
+function Wheel({ radius, items, colors, onSpinStateChange, onResult }: WheelProps) {
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const winningEpisodeIndex = useRef<number | null>(null);
@@ -57,7 +58,10 @@ function Wheel({ items, colors, onSpinStateChange, onResult }: WheelProps) {
   }
 
   return (
-    <div className="wheel-container">
+    <div 
+      className="wheel-container"
+      style={{ width: radius * 2, height: radius * 2 }}
+    >
       <div className="wheel-wrapper">
         <div
           className={`wheel ${isSpinning ? "wheel--spinning" : ""}`}

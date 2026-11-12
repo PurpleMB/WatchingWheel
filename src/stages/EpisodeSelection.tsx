@@ -84,6 +84,7 @@ function EpisodeSelection({
       {!isLoading &&
         episodes.filter((ep) => ep.season === selectedSeason).length > 0 && (
           <Wheel
+            radius={250}
             items={seasonEpisodes.map((ep) => ep.name)}
             colors={WHEEL_COLORS}
             onSpinStateChange={setIsSpinning}
