@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import type { Stage } from "./types/stage";
+import Wheel from "./components/Wheel";
 import ShowSelection from "./stages/ShowSelection";
 import EpisodeSelection from "./stages/EpisodeSelection";
 import ResultsDisplay from "./stages/ResultsDisplay";
@@ -45,7 +46,24 @@ function App() {
   return (
     <div className="app">
       <div className="header">
-        <h1>Watching Wheel</h1>
+        <h1
+          aria-label="Watching Wheel"
+          aria-hidden="true"
+        >
+          Watching
+        </h1>
+
+        <div
+          className="header__wheel"
+          aria-hidden="true"
+        >
+          <Wheel
+            radius={40}
+            items={["w", "H", "E", "E", "L"]}
+            onSpinStateChange={() => {}}
+            onResult={() => {}}
+          />
+        </div>
       </div>
 
       <div className="step-display-container">

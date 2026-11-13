@@ -62,8 +62,12 @@ body {
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
   margin-bottom: 2rem;
-  text-align: center;
+  padding-right: 10px;
 }
 
 .header h1 {
@@ -71,8 +75,32 @@ body {
   color: var(--accent);
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: bold;
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0em;
+  white-space: nowrap;
+}
+
+.header__wheel {
+  flex: none;
+}
+
+.header__wheel .wheel__label {
+  overflow: visible;
+  padding-right: 0.6rem;
+}
+
+.header__wheel .wheel__label-text {
+  display: inline-block;
+  transform: rotate(90deg);
+  font-weight: bold;
+  font-size: 0.875rem; /* Adjust as needed */
+}
+
+.header__wheel .wheel-pointer {
+  right: -10px;
+  border-top-width: 7px;
+  border-bottom-width: 7px;
+  border-right-width: 15px;
 }
 
 .step-display-container {
