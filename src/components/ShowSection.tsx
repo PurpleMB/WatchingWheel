@@ -40,7 +40,7 @@ function ShowSection({
         1,
         Math.floor((gridWidth + gap) / (cardWidth + gap)),
       );
-      setPageSize(Math.floor(gridWidth / cardWidth));
+      setPageSize(nextPageSize);
     }
 
     updatePageSize();
@@ -86,34 +86,59 @@ function ShowSection({
         className="show-section__card-measure"
         aria-hidden="true"
       />
-      <div ref={gridRef} id={gridId} className="show-grid">
-        {visibleShows.map((show) => (
-          <ShowButton key={show.id} show={show} onSelect={onSelectShow} />
-        ))}
-      </div>
 
-      {pageCount > 1 && (
-        <nav className="show-section__pagination" aria-label={`${title} pages`}>
+      <div className="show-section__carousel">
+        {pageCount > 1 && (
           <button
+            className="show-section__carousel-button show-section__carousel-button--prev"
             type="button"
+            aria-label={`Previous ${title} page`}
             aria-controls={gridId}
             onClick={() => setPage(currentPage - 1)}
             disabled={currentPage === 0}
           >
-            Previous
+            <i className="bi bi-chevron-left" aria-hidden="true" />
           </button>
-          <span aria-live="polite" aria-atomic="true">
-            Page {currentPage + 1} of {pageCount}
-          </span>
+        )}
+
+        <div ref={gridRef} id={gridId} className="show-grid">
+          {visibleShows.map((show) => (
+            <ShowButton key={show.id} show={show} onSelect={onSelectShow} />
+          ))}
+        </div>
+
+        {pageCount > 1 && (
           <button
+            className="show-section__carousel-button show-section__carousel-button--next"
             type="button"
+            aria-label={`Next ${title} page`}
             aria-controls={gridId}
             onClick={() => setPage(currentPage + 1)}
             disabled={currentPage === pageCount - 1}
           >
-            Next
+            <i className="bi bi-chevron-right" aria-hidden="true" />
           </button>
-        </nav>
+        )}
+      </div>
+
+      {pageCount > 1 && (
+        <div className="show-section__page-indicators">
+          {Array.from({ length: pageCount }, (_, index) => (
+            <div
+              key={index}
+              aria-hidden="true"
+              className={`show-section__page-indicator 
+                ${
+                  index === currentPage
+                    ? "show-section__page-indicator--current"
+                    : ""
+                }`}
+            />
+          ))}
+          <span className="visually-hidden" aria-live="polite">
+            Page {currentPage + 1} of {pageCount}
+          </span>
+        </div>
       )}
     </section>
   );
