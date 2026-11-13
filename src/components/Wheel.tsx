@@ -122,9 +122,7 @@ function Wheel({
                   transform: `translateY(-50%) rotate(${angle - 90}deg)`,
                 }}
               >
-                <span className="wheel__label-text">
-                  {item}
-                </span>
+                <span className="wheel__label-text">{item}</span>
               </span>
             );
           })}

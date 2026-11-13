@@ -46,17 +46,11 @@ function App() {
   return (
     <div className="app">
       <div className="header">
-        <h1
-          aria-label="Watching Wheel"
-          aria-hidden="true"
-        >
+        <h1 aria-label="Watching Wheel" aria-hidden="true">
           Watching
         </h1>
 
-        <div
-          className="header__wheel"
-          aria-hidden="true"
-        >
+        <div className="header__wheel" aria-hidden="true">
           <Wheel
             radius={40}
             items={["w", "H", "E", "E", "L"]}

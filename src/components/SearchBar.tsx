@@ -20,6 +20,7 @@ function SearchBar({ searchPreviews, onSearch, onSelectShow }: SearchBarProps) {
   const [previewState, setPreviewState] = useState<PreviewState>({
     status: "idle",
   });
+  const [suggestionsOpen, setSuggestionsOpen] = useState(false);
   const query = inputValue.trim();
 
   useEffect(() => {
@@ -63,12 +64,15 @@ function SearchBar({ searchPreviews, onSearch, onSelectShow }: SearchBarProps) {
     event.preventDefault();
 
     if (query) {
+      setSuggestionsOpen(false);
       onSearch(query);
     }
   }
 
   const currentPreview =
-    previewState.status !== "idle" && previewState.query === query
+    previewState.status !== "idle" &&
+    previewState.query === query &&
+    suggestionsOpen
       ? previewState
       : null;
 
@@ -83,7 +87,10 @@ function SearchBar({ searchPreviews, onSearch, onSelectShow }: SearchBarProps) {
             type="search"
             placeholder="Search shows"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => {
+              setInputValue(e.target.value);
+              setSuggestionsOpen(true);
+            }}
           />
           <button type="submit" aria-label="Search">
             <i className="bi bi-search" aria-hidden="true" />
@@ -91,29 +98,36 @@ function SearchBar({ searchPreviews, onSearch, onSelectShow }: SearchBarProps) {
         </div>
       </form>
 
-      {currentPreview?.status === "loading" && (
-        <p role="status">Loading suggestions…</p>
-      )}
+      {currentPreview && (
+        <div className="search-bar__suggestions-container">
+          {currentPreview?.status === "loading" && (
+            <p role="status">Loading suggestions…</p>
+          )}
 
-      {currentPreview?.status === "error" && (
-        <p role="alert">Could not load suggestions. Please try again.</p>
-      )}
+          {currentPreview?.status === "error" && (
+            <p role="alert">Could not load suggestions. Please try again.</p>
+          )}
 
-      {currentPreview?.status === "success" &&
-        (currentPreview.shows.length > 0 ? (
-          <ul className="search-bar__suggestions" aria-label="Show suggestions">
-            {currentPreview.shows.map((show) => (
-              <li key={show.id}>
-                <button type="button" onClick={() => onSelectShow(show)}>
-                  {show.name}
-                  {show.premiered && ` (${show.premiered.slice(0, 4)})`}
-                </button>
-              </li>
+          {currentPreview?.status === "success" &&
+            (currentPreview.shows.length > 0 ? (
+              <ul
+                className="search-bar__suggestions"
+                aria-label="Show suggestions"
+              >
+                {currentPreview.shows.map((show) => (
+                  <li key={show.id}>
+                    <button type="button" onClick={() => onSelectShow(show)}>
+                      {show.name}
+                      {show.premiered && ` (${show.premiered.slice(0, 4)})`}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p role="status">No suggestions found.</p>
             ))}
-          </ul>
-        ) : (
-          <p role="status">No suggestions found.</p>
-        ))}
+        </div>
+      )}
     </div>
   );
 }
