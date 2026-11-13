@@ -19,9 +19,9 @@ function StepDisplay({ steps, currentStepIndex }: Props) {
             <div
               className={`bead ${isCurrent ? "bead--current" : ""} ${index < currentStepIndex ? "bead--done" : ""}`}
             >
+              <span className="bead__icon">{step.icon}</span>
               {isCurrent && (
                 <>
-                  <span className="bead__icon">{step.icon}</span>
                   <span className="bead__label">{step.label}</span>
                 </>
               )}
